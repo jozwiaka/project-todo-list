@@ -1,0 +1,38 @@
+<div class="content box">
+    <form id="itemsForm" action="/items-form" method="post">
+        <input type="hidden" name="checkItem" value="">
+        <input type="hidden" name="deleteItem" value="">
+        <%for (var i=0; i<itemsNames.length; i++){%>
+            <div class="item">
+
+                <input id="<%=itemsIds[i]%>" type="checkbox" onclick="checkItemAndSubmitForm('<%=itemsIds[i]%>')"
+                    <%if(itemsChecked[i]) { %>
+                checked <% }%>
+                    >
+
+                    <p>
+                        <%=itemsNames[i]%>
+                    </p>
+
+                    <input class="button-delete" type="image" src="imgs/button-delete.png"
+                        onclick="deleteItemAndSubmitForm('<%=itemsIds[i]%>')">
+            </div>
+            <%}%>
+    </form>
+
+    <form class="item" action="/new-item" method="post">
+        <input type="text" name="newItem" placeholder="New Item">
+        <button class="button-add" type="submit" name="button" value="<%=modeTitle%>">+</button>
+    </form>
+</div>
+
+<script>
+    function deleteItemAndSubmitForm(deleteItemValue) {
+        document.querySelector('input[name="deleteItem"]').value = deleteItemValue;
+        document.querySelector('#itemsForm').submit();
+    }
+    function checkItemAndSubmitForm(checkItemValue) {
+        document.querySelector('input[name="checkItem"]').value = checkItemValue;
+        document.querySelector('#itemsForm').submit();
+    }
+</script>

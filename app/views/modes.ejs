@@ -1,0 +1,41 @@
+<div class="menu box">
+    <form id="modesForm" method="post" action="/modes-form">
+        <input type="hidden" name="setMode" value="">
+        <input type="hidden" name="deleteMode" value="">
+
+        <%for (var i=0; i<modesTitles.length; i++){%>
+            <div class="item">
+
+                <input id="<%=modesIds[i]%>" type="radio" onclick="setModeAndSubmitForm('<%=modesIds[i]%>')">
+
+                <p>
+                    <%=modesTitles[i]%>
+                </p>
+
+                <input class="button-delete" type="image" src="imgs/button-delete.png"
+                    onclick="deleteModeAndSubmitForm('<%=modesIds[i]%>')">
+
+            </div>
+            <%}%>
+    </form>
+
+    <form class="item" action="/new-mode" method="post">
+        <input type="text" name="newMode" placeholder="New Mode">
+        <button class="button-add" type="submit" name="button" value="<%=modeTitle%>">+</button>
+    </form>
+</div>
+
+<script>
+    function deleteModeAndSubmitForm(deleteModeValue) {
+        document.querySelector('input[name="deleteMode"]').value = deleteModeValue;
+        document.querySelector('#modesForm').submit();
+    }
+    function setModeAndSubmitForm(setModeValue) {
+        document.querySelector('input[name="setMode"]').value = setModeValue;
+        document.querySelector('#modesForm').submit();
+    }
+
+    const option = document.querySelector("#<%=modeId%>");
+    option.checked = true;
+
+</script>

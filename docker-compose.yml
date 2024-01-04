@@ -1,0 +1,35 @@
+version: "3"
+services:
+  db-service:
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile.db
+    container_name: db-container
+    image: db-image:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - my_network
+    volumes:
+      - db_data:/data/db
+    restart: always
+
+  app-service:
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile.app
+    container_name: app-container
+    image: app-image:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - my_network
+    depends_on:
+      - db-service
+    restart: always
+
+volumes:
+  db_data:
+
+networks:
+  my_network:

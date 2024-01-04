@@ -1,0 +1,12 @@
+FROM mongo:latest
+
+EXPOSE 27017
+
+VOLUME ["/data/db"]
+
+ENV MONGO_INITDB_ROOT_USERNAME=admin
+ENV MONGO_INITDB_ROOT_PASSWORD=password
+
+COPY db/init.js /docker-entrypoint-initdb.d/
+
+CMD ["mongod"]
