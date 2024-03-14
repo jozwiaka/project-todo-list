@@ -52,8 +52,7 @@ function Invoke-DockerRestart {
 
 function Invoke-DockerBuild {
     Log-Message "Building Docker images..."
-    docker build -t db-image -f docker/Dockerfile.db .
-    docker build -t app-image -f docker/Dockerfile.app .
+    docker-compose build
 }
 
 function Invoke-KubernetesCleanBuildStart {
